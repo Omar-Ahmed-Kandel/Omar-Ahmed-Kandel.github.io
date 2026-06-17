@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omar Ahmed Kandel | Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #112240;
+      --navy-light: #1E3A5F;
+      --accent: #00C8FF;
+      --accent2: #7B61FF;
+      --text: #CCD6F6;
+      --text-muted: #8892B0;
+      --white: #E6F1FF;
+      --card-bg: #112240;
+      --border: rgba(0,200,255,0.15);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; width:100%; z-index:100;
+      background: rgba(10,22,40,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; display: flex; align-items:center; justify-content:space-between; height: 64px;
+    }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color: var(--text-muted); text-decoration:none; font-size: 0.85rem; font-weight:500; letter-spacing:0.5px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    section { padding: 100px 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; align-items:center;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,200,255,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(123,97,255,0.06) 0%, transparent 50%), var(--navy);
+      padding-top: 64px;
+    }
+    .hero-inner { display: flex; align-items:center; gap: 4rem; flex-wrap: wrap; }
+    .hero-text { flex: 1; min-width: 280px; }
+    .hero-eyebrow { font-size: 0.8rem; font-weight:600; letter-spacing:3px; color: var(--accent); text-transform:uppercase; margin-bottom: 1rem; }
+    .hero-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; color: var(--white); margin-bottom: 0.5rem; }
+    .hero-title { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--accent2); font-weight: 500; margin-bottom: 1.5rem; }
+    .hero-desc { color: var(--text-muted); font-size:1rem; max-width: 480px; margin-bottom: 2rem; }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+    .btn-primary { padding: 0.75rem 1.8rem; border-radius:6px; background: var(--accent); color: var(--navy); font-weight:700; font-size:0.9rem; text-decoration:none; transition: all 0.2s; border: 2px solid var(--accent); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline { padding: 0.75rem 1.8rem; border-radius:6px; background: transparent; color: var(--accent); font-weight:700; font-size:0.9rem; text-decoration:none; transition: all 0.2s; border: 2px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: var(--navy); }
+
+    /* PHOTO */
+    .hero-photo { flex-shrink:0; }
+    .photo-ring { width: 220px; height: 220px; border-radius: 50%; border: 3px solid var(--accent); padding: 5px; background: linear-gradient(135deg, rgba(0,200,255,0.15), rgba(123,97,255,0.15)); box-shadow: 0 0 40px rgba(0,200,255,0.2); overflow: hidden; }
+    .photo-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; display: block; }
+    .photo-placeholder { width:100%; height:100%; border-radius:50%; background: var(--navy-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; color: var(--text-muted); font-size:0.75rem; text-align:center; }
+    .photo-placeholder i { font-size:2.5rem; color: var(--accent); opacity:0.5; }
+
+    /* SECTION TITLES */
+    .section-label { font-size:0.75rem; font-weight:700; letter-spacing:3px; color: var(--accent); text-transform:uppercase; margin-bottom:0.5rem; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight:700; color: var(--white); margin-bottom:1rem; }
+    .section-line { width:60px; height:3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius:2px; margin-bottom:3rem; }
+
+    /* ABOUT */
+    #about { background: var(--navy-mid); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+    .about-text p { color: var(--text-muted); margin-bottom:1rem; font-size:0.95rem; }
+    .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .stat-card { background: var(--navy); border: 1px solid var(--border); border-radius:10px; padding:1.2rem; text-align:center; }
+    .stat-num { font-family:'Space Grotesk',sans-serif; font-size:2rem; font-weight:700; color: var(--accent); }
+    .stat-label { font-size:0.75rem; color:var(--text-muted); margin-top:0.2rem; }
+
+    /* EDUCATION */
+    .edu-card { background: var(--card-bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius:10px; padding:1.5rem 2rem; display:flex; align-items:center; gap:1.5rem; max-width:600px; }
+    .edu-icon { font-size:2rem; color:var(--accent); flex-shrink:0; }
+    .edu-degree { font-size:1rem; font-weight:600; color:var(--white); }
+    .edu-school { color:var(--text-muted); font-size:0.9rem; margin-top:0.2rem; }
+
+    /* SERVICES */
+    #services { background: var(--navy-mid); }
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1.5rem; }
+    .service-card { background: var(--navy); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; position:relative; overflow:hidden; }
+    .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity:0; transition:opacity 0.2s; }
+    .service-card:hover { transform:translateY(-4px); border-color:var(--accent); box-shadow:0 10px 30px rgba(0,200,255,0.1); }
+    .service-card:hover::before { opacity:1; }
+    .service-icon { font-size:1.8rem; color:var(--accent); margin-bottom:1rem; }
+    .service-title { font-weight:600; color:var(--white); margin-bottom:0.5rem; font-size:0.95rem; }
+    .service-desc { font-size:0.82rem; color:var(--text-muted); }
+
+    /* PROJECTS SECTION HEADERS */
+    .projects-section-label { font-size:0.75rem; font-weight:700; letter-spacing:3px; color: var(--accent2); text-transform:uppercase; margin-bottom:0.5rem; }
+    .projects-section-title { font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:600; color:var(--white); margin-bottom:0.5rem; }
+    .projects-divider { width:40px; height:2px; background: linear-gradient(90deg, var(--accent2), transparent); margin-bottom:2rem; }
+
+    /* FEATURED PROJECTS - BIG CARDS */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .featured-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0,200,255,0.35);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+    .featured-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .featured-card.hero-card {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      min-height: 280px;
+    }
+    .featured-badge-strip {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: var(--navy); font-size:0.65rem; font-weight:800;
+      letter-spacing:1.5px; text-transform:uppercase;
+      padding:0.35rem 1rem;
+    }
+    .featured-img {
+      width: 100%; height: 200px;
+      background: var(--navy-light);
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:0.5rem;
+      color: var(--text-muted); font-size:0.8rem;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .featured-card.hero-card .featured-img {
+      width: 45%; height: auto; min-height: 100%;
+    }
+    .featured-img i { font-size:3.5rem; color:var(--accent); opacity:0.35; }
+    .featured-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .featured-body {
+      padding: 1.8rem;
+      display: flex; flex-direction: column;
+      flex: 1;
+    }
+    .featured-card.hero-card .featured-body { padding: 2rem 2rem; }
+    .project-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.8rem; }
+    .tag { font-size:0.65rem; font-weight:600; letter-spacing:1px; padding:0.2rem 0.6rem; border-radius:20px; background: rgba(0,200,255,0.1); color:var(--accent); border:1px solid rgba(0,200,255,0.2); }
+    .tag.purple { background: rgba(123,97,255,0.1); color:var(--accent2); border-color: rgba(123,97,255,0.2); }
+    .project-name { font-weight:700; color:var(--white); font-size:1.15rem; margin-bottom:0.6rem; }
+    .featured-card.hero-card .project-name { font-size:1.4rem; }
+    .project-desc { font-size:0.85rem; color:var(--text-muted); flex:1; margin-bottom:1.2rem; line-height:1.7; }
+    .project-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-top:auto; }
+    .project-link { display:inline-flex; align-items:center; gap:0.4rem; color:var(--accent); font-size:0.82rem; font-weight:600; text-decoration:none; transition:gap 0.2s; }
+    .project-link:hover { gap:0.7rem; }
+    .btn-try { display:inline-flex; align-items:center; gap:0.4rem; padding:0.5rem 1.2rem; border-radius:6px; background: linear-gradient(90deg, var(--accent), var(--accent2)); color:var(--navy); font-size:0.8rem; font-weight:700; text-decoration:none; transition:opacity 0.2s; }
+    .btn-try:hover { opacity:0.85; }
+
+    /* REGULAR PROJECT GRID */
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.5rem; margin-bottom:4rem; }
+    .project-card { background: var(--card-bg); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition: transform 0.2s, box-shadow 0.2s; display:flex; flex-direction:column; }
+    .project-card:hover { transform:translateY(-5px); box-shadow:0 15px 40px rgba(0,0,0,0.3); }
+    .project-img { width:100%; height:150px; background: var(--navy-light); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.8rem; flex-direction:column; gap:0.5rem; overflow:hidden; }
+    .project-img i { font-size:2.2rem; color:var(--accent); opacity:0.35; }
+    .project-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .project-body { padding:1.3rem; flex:1; display:flex; flex-direction:column; }
+    .project-body .project-name { font-size:0.95rem; }
+    .project-body .project-desc { font-size:0.8rem; }
+
+    /* IMAGE SLIDER for Data Analysis */
+    .slider-wrap { position:relative; width:100%; height:200px; overflow:hidden; background: var(--navy-light); }
+    .slider-track { display:flex; height:100%; transition: transform 0.4s ease; }
+    .slider-track img { width:100%; height:100%; object-fit:cover; flex-shrink:0; }
+    .slider-track .slide-placeholder { width:100%; height:100%; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; color:var(--text-muted); font-size:0.75rem; }
+    .slider-track .slide-placeholder i { font-size:2rem; color:var(--accent); opacity:0.35; }
+    .slider-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(10,22,40,0.75); border:none; color:var(--accent); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:2; }
+    .slider-btn:hover { background:rgba(0,200,255,0.2); }
+    .slider-btn.prev { left:8px; }
+    .slider-btn.next { right:8px; }
+    .slider-dots { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); display:flex; gap:5px; }
+    .slider-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer; transition:background 0.2s; border:none; }
+    .slider-dot.active { background:var(--accent); }
+
+    /* CONTACT */
+    #contact { background: var(--navy-mid); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+    .contact-text p { color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem; }
+    .contact-links { display:flex; flex-direction:column; gap:1rem; }
+    .contact-link { display:flex; align-items:center; gap:1rem; background: var(--navy); border:1px solid var(--border); border-radius:10px; padding:1rem 1.5rem; text-decoration:none; transition: border-color 0.2s, transform 0.2s; }
+    .contact-link:hover { border-color:var(--accent); transform:translateX(4px); }
+    .contact-link-icon { font-size:1.3rem; color:var(--accent); width:24px; text-align:center; }
+    .contact-link-label { font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+    .contact-link-value { font-size:0.9rem; color:var(--white); font-weight:500; }
+
+    footer { text-align:center; padding:2rem; color:var(--text-muted); font-size:0.8rem; border-top:1px solid var(--border); }
+
+    @media(max-width:768px) {
+      .about-grid, .contact-grid { grid-template-columns:1fr; }
+      .hero-inner { flex-direction:column-reverse; text-align:center; }
+      .hero-desc { margin:0 auto 2rem; }
+      .hero-btns { justify-content:center; }
+      .nav-links { display:none; }
+      .featured-grid { grid-template-columns:1fr; }
+      .featured-card.hero-card { flex-direction:column; }
+      .featured-card.hero-card .featured-img { width:100%; height:200px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">OAK.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">👋 Hello</p>
+        <h1 class="hero-name">Omar Ahmed<br/>Kandel</h1>
+        <p class="hero-title">Data Scientist & AI Engineer</p>
+        <p class="hero-desc">Turning raw data into intelligent decisions, building ML models, interactive dashboards, and AI-powered solutions that drive real business value and achieve goals.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-outline">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-ring">
+            <img src="D:\Portfolio\photos\mm.jpeg" alt="Omar Ahmed Kandel" />
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Your photo here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a passionate Data Scientist and AI Engineer with a strong foundation in machine learning, statistical modeling, and business intelligence. I specialize in bridging the gap between complex data and actionable business decisions.</p>
+        <p>Whether it's developing predictive models that save lives, building computer vision systems for smart cities, or creating insightful dashboards that guide strategy I bring a results-driven mindset to every project.</p>
+        <p>I work closely with businesses and organizations to understand their challenges, then engineer data solutions that are not just technically sound, but genuinely impactful. My goal is simple: <strong style="color:var(--accent)">make data work for you.</strong></p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">12+</div><div class="stat-label">Projects Completed</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">ML Models Deployed</div></div>
+        <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">BI Dashboards Built</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+    <div class="edu-card">
+      <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div>
+        <div class="edu-degree">Bachelor of Information Systems (BIS)</div>
+        <div class="edu-school">El Shorouk Academy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-label">What I Offer</p>
+    <h2 class="section-title">Offered Services</h2>
+    <div class="section-line"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-broom"></i></div>
+        <div class="service-title">Data Cleaning & Preparation</div>
+        <div class="service-desc">Transforming messy, raw data into clean, structured datasets ready for analysis or modeling.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="service-title">Dashboard Creation & Reporting</div>
+        <div class="service-desc">Interactive Power BI & Excel dashboards that communicate your KPIs clearly to any audience.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+        <div class="service-title">Business Analysis & KPI Tracking</div>
+        <div class="service-desc">Defining and monitoring the metrics that matter most to your business growth and performance.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-brain"></i></div>
+        <div class="service-title">Machine Learning Models</div>
+        <div class="service-desc">End-to-end ML pipelines from data prep to training, evaluation, and production-ready deployment.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-eye"></i></div>
+        <div class="service-title">Computer Vision Solutions</div>
+        <div class="service-desc">Custom CV models for object detection, classification, and visual intelligence using deep learning.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-rocket"></i></div>
+        <div class="service-title">Model Deployment on Hugging Face</div>
+        <div class="service-desc">Publishing trained models as live APIs and interactive demos on Hugging Face Spaces for real-world use.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-comments"></i></div>
+        <div class="service-title">LLM & RAG Applications</div>
+        <div class="service-desc">Building intelligent document Q&A systems and chatbots powered by large language models and retrieval-augmented generation.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-database"></i></div>
+        <div class="service-title">Data Pipeline & ETL Design</div>
+        <div class="service-desc">Designing automated pipelines that extract, transform, and load data reliably keeping your analytics always up to date.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">My Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+
+    <!-- ===== AI & ML ===== -->
+    <p class="projects-section-label">Artificial Intelligence & Machine Learning</p>
+    <p class="projects-section-title">Predictive Models & AI Systems</p>
+    <div class="projects-divider"></div>
+
+    <!-- FEATURED: CityNex (hero full-width) + RAG (half) + Heart Disease (half) -->
+    <div class="featured-grid" style="margin-bottom:2rem;">
+
+      <!-- CityNex — HERO WIDE CARD -->
+      <div class="featured-card hero-card">
+        <div class="featured-img">
+          <img src="D:\Portfolio\photos\CV.png" alt="CityNex Detection"/>
+        </div>
+        <div class="featured-body">
+          <div class="featured-badge-strip" style="margin:-1.8rem -2rem 1.5rem; padding:0.35rem 2rem;">⭐ FEATURED — COMPUTER VISION</div>
+          <div class="project-tags">
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Object Detection</span>
+            <span class="tag purple">Live API</span>
+            <span class="tag purple">Hugging Face</span>
+          </div>
+          <div class="project-name">CityNex Detection</div>
+          <div class="project-desc">An advanced computer vision system for urban environment inspection. Detects and classifies city infrastructure elements Trash, Graffiti, Broken Street light, and more from images using deep learning. Deployed as a fully live FAST API on Hugging Face, allowing developers to integrate urban detection directly into their applications.</div>
+          <div class="project-actions">
+            <a href="https://github.com/Omar-Ahmed-Kandel/CityNex-Detection" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a>
+            <a href="https://omarkandel-urban-inspector.hf.space/docs#/default/detect_detect_post" target="_blank" class="btn-try"><i class="fas fa-play"></i> Try the Live API</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RAG — half-width featured -->
+      <div class="featured-card">
+        <div class="featured-badge-strip">⭐ FEATURED — LLM / RAG</div>
+        <div class="featured-img" style="height:180px;">
+          <img src="D:\Portfolio\photos\G.png" alt="RAG Document Assistant"/>
+        </div>
+        <div class="featured-body">
+          <div class="project-tags">
+            <span class="tag">RAG</span>
+            <span class="tag">LLM</span>
+            <span class="tag">Gradio</span>
+            <span class="tag purple">NLP</span>
+          </div>
+          <div class="project-name">RAG Document Assistant</div>
+          <div class="project-desc">Upload any document and ask questions the assistant answers based solely on the document's content using retrieval-augmented generation with large language models. Built with a clean Gradio UI for instant interaction.</div>
+          <div class="project-actions">
+            <a href="https://github.com/Omar-Ahmed-Kandel/RAG-Document-Assistant-ITI-" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heart Disease — half-width featured -->
+      <div class="featured-card">
+        <div class="featured-badge-strip">⭐ FEATURED — HEALTHCARE AI</div>
+        <div class="featured-img" style="height:180px;">
+          <img src="D:\Portfolio\photos\HD.png" alt="Heart Disease Prediction"/>
+        </div>
+        <div class="featured-body">
+          <div class="project-tags">
+            <span class="tag">Classification</span>
+            <span class="tag">Healthcare</span>
+            <span class="tag">Scikit-learn</span>
+          </div>
+          <div class="project-name">Heart Disease Prediction</div>
+          <div class="project-desc">A machine learning model that predicts heart disease likelihood from clinical parameters. Designed to assist medical professionals with early diagnosis and risk assessment, potentially saving lives through data-driven insights.</div>
+          <div class="project-actions">
+            <a href="https://github.com/Omar-Ahmed-Kandel/Sprints-Project" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Regular AI/ML projects -->
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-img"><i class="fas fa-brain"></i><span>Healthcare</span></div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Classification</span><span class="tag">Healthcare</span></div>
+          <div class="project-name">Brain Stroke Prediction</div>
+          <div class="project-desc">Predicts stroke risk from patient health data. Helps identify high-risk patients for early medical intervention.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Brain-Stroke" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img"><i class="fas fa-home"></i><span>Regression</span></div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Regression</span><span class="tag">Real Estate</span></div>
+          <div class="project-name">House Pricing Prediction</div>
+          <div class="project-desc">Predicts residential property prices using feature engineering and regression models for buyers, sellers, and agencies.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Housing-Pricing-Project" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img"><i class="fas fa-envelope-open-text"></i><span>Classification</span></div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Classification</span><span class="tag">ML</span></div>
+          <div class="project-name">Spam Email Detection</div>
+          <div class="project-desc">ML-powered classifier that detects spam emails with high accuracy using feature extraction and supervised learning algorithms.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Spam-Emails-Detection-" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img"><i class="fas fa-university"></i><span>Prediction</span></div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Random Forest</span><span class="tag">Education</span></div>
+          <div class="project-name">Graduate Admission Prediction</div>
+          <div class="project-desc">Predicts grad school admission chances using Random Forest. Helps students evaluate their profile against historical data.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Graduate-Admission-Prediction-Using-Random-Forest" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DATA ANALYSIS ===== -->
+    <p class="projects-section-label" style="color:var(--accent)">Data Analysis & Business Intelligence</p>
+    <p class="projects-section-title">Dashboards & Analytical Reports</p>
+    <div class="projects-divider" style="background:linear-gradient(90deg,var(--accent),transparent); margin-bottom:2rem;"></div>
+
+    <div class="projects-grid">
+
+      <!-- Flight Analysis with slider — FEATURED -->
+      <div class="project-card featured" style="border-color:rgba(0,200,255,0.4);">
+        <div style="background:linear-gradient(90deg,var(--accent),var(--accent2));color:var(--navy);font-size:0.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.3rem 0.8rem;">⭐ Featured Project</div>
+        <div class="slider-wrap" id="slider-flight">
+          <div class="slider-track" id="track-flight">
+            <img src="D:\Portfolio\photos\FF.jpg" alt="slide 1"/>
+            <img src="D:\Portfolio\photos\FC.jpg" alt="slide 2"/> 
+          </div>
+          <button class="slider-btn prev" onclick="slideProject('flight',-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-btn next" onclick="slideProject('flight',1)"><i class="fas fa-chevron-right"></i></button>
+          <div class="slider-dots" id="dots-flight">
+            <button class="slider-dot active" onclick="goToSlide('flight',0)"></button>
+            <button class="slider-dot" onclick="goToSlide('flight',1)"></button>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag purple">Power BI</span><span class="tag">Aviation</span><span class="tag">KPI</span><span class="tag">Dashboard</span></div>
+          <div class="project-name">Flight Analysis</div>
+          <div class="project-desc">A comprehensive Power BI dashboard analyzing flight data — delays, routes, airline performance, and passenger trends. Capstone project with full data storytelling and visual design.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Flight-Analysis---Amit-Final-Project" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+<!-- Sales Analysis -->
+<div class="project-card">
+  <div class="project-img">
+    <img src="D:\Portfolio\photos\ES.png" alt="Sales Analysis"/>
+  </div>
+  <div class="project-body">
+    <div class="project-tags"><span class="tag purple">Excel</span><span class="tag">Sales</span></div>
+    <div class="project-name">Sales Analysis</div>
+    <div class="project-desc">Excel-based sales report featuring pivot tables, charts, and trend analysis to identify top products, revenue patterns, and growth opportunities.</div>
+    <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Task-1" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+</div>
+
+      <!-- Company Sales & Operations with slider -->
+      <div class="project-card">
+        <div class="slider-wrap" id="slider-company">
+          <div class="slider-track" id="track-company">
+            <img src="D:\Portfolio\photos\CR.jpg" alt="slide 1"/>
+            <img src="D:\Portfolio\photos\CO.jpg" alt="slide 2"/> 
+          </div>
+          <button class="slider-btn prev" onclick="slideProject('company',-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-btn next" onclick="slideProject('company',1)"><i class="fas fa-chevron-right"></i></button>
+          <div class="slider-dots" id="dots-company">
+            <button class="slider-dot active" onclick="goToSlide('company',0)"></button>
+            <button class="slider-dot" onclick="goToSlide('company',1)"></button>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag purple">Power BI</span><span class="tag">Operations</span><span class="tag">KPI</span><span class="tag">Dashboard</span></div>
+          <div class="project-name">Company Sales & Operations Analysis</div>
+          <div class="project-desc">Deep-dive analysis of company sales and operational KPIs revenue breakdown, performance tracking, and data-driven recommendations for efficiency.</div>
+          <div class="project-actions"><a href="https://github.com/Omar-Ahmed-Kandel/Task-4" target="_blank" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>Have a project in mind, a dataset to explore, or a business problem that needs a data-driven solution? I'd love to hear from you.</p>
+        <p>Whether you're a startup looking for your first data pipeline or an enterprise needing advanced ML capabilities let's talk and figure out how I can help.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:omarahmedkandeloa@gmail.com" class="contact-link">
+          <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">omarahmedkandeloa@gmail.com</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/omar-ahmed-kandel/" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><i class="fab fa-linkedin"></i></div>
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">omar-ahmed-kandel</div></div>
+        </a>
+        <a href="https://github.com/Omar-Ahmed-Kandel" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+          <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">Omar-Ahmed-Kandel</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by Omar Ahmed Kandel &copy; 2025 — Data Scientist & AI Engineer</p>
+</footer>
+
+<script>
+  const sliderState = {};
+
+  function initSlider(id) {
+    if (!sliderState[id]) sliderState[id] = { current: 0 };
+  }
+
+  function getSlideCount(id) {
+    return document.getElementById('track-' + id).children.length;
+  }
+
+  function updateSlider(id) {
+    const track = document.getElementById('track-' + id);
+    const dots = document.querySelectorAll('#dots-' + id + ' .slider-dot');
+    const current = sliderState[id].current;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function slideProject(id, dir) {
+    initSlider(id);
+    const count = getSlideCount(id);
+    sliderState[id].current = (sliderState[id].current + dir + count) % count;
+    updateSlider(id);
+  }
+
+  function goToSlide(id, index) {
+    initSlider(id);
+    sliderState[id].current = index;
+    updateSlider(id);
+  }
+</script>
+
+</body>
+</html>
