@@ -205,8 +205,11 @@
       .hero-btns { justify-content:center; }
       .nav-links { display:none; }
       .featured-grid { grid-template-columns:1fr; }
-      .featured-card.hero-card { flex-direction:column; }
-      .featured-card.hero-card .featured-img { width:100%; height:200px; }
+      .featured-card.hero-card { flex-direction:column; min-height:unset; }
+      .featured-card.hero-card .featured-img { width:100%; height:220px; min-height:unset; }
+      .featured-card.hero-card .featured-body { padding:1.2rem; }
+      .featured-badge-strip { margin: -1.2rem -1.2rem 1rem !important; padding: 0.35rem 1.2rem !important; }
+      .featured-card.hero-card .project-name { font-size:1.1rem; }
     }
   </style>
 </head>
